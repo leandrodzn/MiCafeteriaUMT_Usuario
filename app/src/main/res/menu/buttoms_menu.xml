@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Productos"
+        android:icon="@drawable/store"
+        android:id="@+id/productos"
+        />
+    <item android:title="Carrito"
+        android:icon="@drawable/shopping_cart"
+        android:id="@+id/carrito"
+        />
+    <item android:title="Pedidos"
+        android:icon="@drawable/receipt_long"
+        android:id="@+id/pedidos"
+        />
+    <item android:title="Perfil"
+        android:icon="@drawable/person"
+        android:id="@+id/perfil"
+        />
+</menu>

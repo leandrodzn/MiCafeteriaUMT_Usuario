@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="cafe">#383110</color>
+    <color name="cafe_claro">#83784A</color>
+    <color name="amarillo">#CAAD27</color>
+</resources>

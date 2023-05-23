@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cafe"
+    tools:context=".InfoProductoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/info_producto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:animateLayoutChanges="true"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#ffffff"
+            app:cardUseCompatPadding="true" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/nombreProducto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+
+                <ImageView
+                    android:id="@+id/imagenProducto"
+                    android:layout_width="200dp"
+                    android:layout_height="230dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_gravity="center"
+                    app:layout_constraintTop_toBottomOf="@+id/nombreProducto"
+                    app:srcCompat="@drawable/fondo_inicio" />
+
+                <TextView
+                    android:id="@+id/labelDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Descripción:"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@+id/imagenProducto"
+                    />
+
+                <TextView
+                    android:id="@+id/descripcionProducto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@+id/labelDescripcion"
+                    />
+
+                <TextView
+                    android:id="@+id/labelCantidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Cantidad disponible:"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@+id/descripcionProducto"
+                    />
+
+                <TextView
+                    android:id="@+id/cantidadProducto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@+id/labelCantidad"
+                    />
+
+                <TextView
+                    android:id="@+id/labelPrecio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Precio por unidad:"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@+id/cantidadProducto"
+                    />
+
+                <TextView
+                    android:id="@+id/precioProducto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@+id/labelPrecio"
+                    />
+
+                <TextView
+                    android:id="@+id/labelCantidadCompra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Cantidad seleccionada:"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@+id/precioProducto"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/selectCantidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="35dp"
+                    android:layout_marginEnd="80dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelCantidadCompra"
+                    android:textColorHint="@color/white"
+                    app:boxBackgroundColor="@color/cafe_claro"
+                    app:boxStrokeColor="@color/white"
+                    app:hintTextColor="@color/white"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/acCantidad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:inputType="none">
+                    </AutoCompleteTextView>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_gravity="center"
+            android:id="@+id/btnAgregarCarrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="3dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Agregar al carrito"
+            app:backgroundTint="#CAAD27"
+            android:textColor="#ffffff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_producto">
+
+        </com.google.android.material.button.MaterialButton>
+
+    </LinearLayout>
+
+</FrameLayout>
