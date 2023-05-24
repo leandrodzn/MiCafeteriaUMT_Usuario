@@ -1,5 +1,6 @@
 package com.example.micafeteriaumt_usuario;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import com.google.android.material.button.MaterialButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +27,9 @@ public class PerfilFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private EditText telefono, nombre, contrasena;
+    private MaterialButton btnActualizar, btnEliminar;
 
     public PerfilFragment() {
         // Required empty public constructor
@@ -59,6 +66,17 @@ public class PerfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+        View vista = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+        telefono = vista.findViewById(R.id.txtTelefono);
+        nombre = vista.findViewById(R.id.txtNombre);
+        contrasena = vista.findViewById(R.id.txtContrasena);
+
+        telefono.setEnabled(false);
+        telefono.setLongClickable(false);
+        telefono.setTextColor(Color.GRAY);
+        //telefono.setBackgroundColor(Color.LTGRAY);
+
+        return vista;
     }
 }
