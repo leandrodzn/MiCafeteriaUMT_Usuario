@@ -116,6 +116,9 @@
                     android:textColorHint="@color/cafe"
                     app:boxStrokeColor="@color/cafe"
                     app:hintTextColor="@color/cafe"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTintMode="multiply"
+                    app:passwordToggleTint="@color/cafe"
                     >
 
                     <EditText

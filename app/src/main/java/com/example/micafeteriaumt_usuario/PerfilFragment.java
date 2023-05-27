@@ -1,5 +1,7 @@
 package com.example.micafeteriaumt_usuario;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -42,7 +44,7 @@ public class PerfilFragment extends Fragment {
     private String mParam2;
 
     private EditText telefono, nombre, contrasena;
-    private MaterialButton btnActualizar, btnEliminar;
+    private MaterialButton btnActualizar, btnCerrarSesion;
     String URL_modificarCliente = "https://afflated-sentries.000webhostapp.com/modificarCliente.php";
     String URL_eliminarCliente = "https://afflated-sentries.000webhostapp.com/eliminarCliente.php";
 
@@ -87,7 +89,7 @@ public class PerfilFragment extends Fragment {
         nombre = vista.findViewById(R.id.txtNombre);
         contrasena = vista.findViewById(R.id.txtContrasena);
         btnActualizar = vista.findViewById(R.id.btnActualizar);
-        btnEliminar = vista.findViewById(R.id.btnEliminar);
+        btnCerrarSesion = vista.findViewById(R.id.btnCerrarSesion);
 
         telefono.setEnabled(false);
         telefono.setLongClickable(false);
@@ -105,6 +107,13 @@ public class PerfilFragment extends Fragment {
                 String contrasenaS = contrasena.getText().toString();
                 String id_cliente = String.valueOf(DatosGlobales.getCliente().getId());
                 actualizarCliente(URL_modificarCliente, id_cliente, nombreS, contrasenaS);
+            }
+        });
+
+        btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrarVentanaConfirmacion();
             }
         });
 
@@ -146,5 +155,37 @@ public class PerfilFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
     }
+
+    private void mostrarVentanaConfirmacion() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Confirmación");
+        builder.setMessage("¿Está seguro de cerrar su sesión?");
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Acciones a realizar si el usuario cancela
+                dialog.dismiss();
+            }
+        });
+
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Acciones a realizar si el usuario confirma
+                dialog.dismiss();
+
+                DatosGlobales.setCliente(null);
+                Toast.makeText(getContext(), "Sesión finalizada", Toast.LENGTH_SHORT).show();
+                Intent irInicio = new Intent(getActivity(), LoginActivity.class);
+                irInicio.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(irInicio);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
 }

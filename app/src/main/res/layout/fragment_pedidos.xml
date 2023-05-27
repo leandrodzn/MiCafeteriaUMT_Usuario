@@ -30,6 +30,21 @@
             android:layout_gravity="center"
             android:text="Mis pedidos" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnActualizarPedidos"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Actualizar"
+            app:backgroundTint="#CAAD27"
+            android:textColor="#ffffff"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tituloPedidos"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listRVCompras"
             android:layout_width="match_parent"
@@ -41,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tituloPedidos" />
+            app:layout_constraintTop_toBottomOf="@+id/btnActualizarPedidos" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
