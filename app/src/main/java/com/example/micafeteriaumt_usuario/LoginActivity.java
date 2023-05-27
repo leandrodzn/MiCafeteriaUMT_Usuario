@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etTelefono, etContrasena;
     MaterialButton btnIniciarSesion, btnIrRegistro;
     String telefono, contrasena;
+    String URL_validarCliente = "https://afflated-sentries.000webhostapp.com/recuperarCliente.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (!telefono.isEmpty() && !contrasena.isEmpty()){
                     if(telefono.length() == 10 && telefono.matches("[0-9]+")){
-                        validarCliente("https://afflated-sentries.000webhostapp.com/recuperarCliente.php");
+                        validarCliente(URL_validarCliente);
                     }else{
                         Toast.makeText(LoginActivity.this, "Debe ingresar un teléfono válido" ,Toast.LENGTH_SHORT).show();
                     }

@@ -230,6 +230,7 @@
                 android:layout_toEndOf="@id/layoutDetalles"
                 android:layout_toRightOf="@id/layoutDetalles"
                 android:background="@android:color/transparent"
+                android:tint="@color/cafe"
                 />
 
         </RelativeLayout>

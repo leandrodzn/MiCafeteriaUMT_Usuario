@@ -1,5 +1,7 @@
 package com.example.micafeteriaumt_usuario;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -21,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +58,8 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
     private List<Compra> compras;
     private ListAdapterCompra listAdapter;
 
+    private MaterialButton btnActualizarPedidos;
+
     private String URL_recuperarCompras = "https://afflated-sentries.000webhostapp.com/recuperarComprasCliente.php";
     private String URL_ocultarCompra = "https://afflated-sentries.000webhostapp.com/ocultarCompra.php";
 
@@ -82,8 +87,7 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
 
     @Override
     public void onItemClick(int id) {
-        Toast.makeText(getContext(), "Ocultando compra...", Toast.LENGTH_SHORT).show();
-        ocultarCompra(URL_ocultarCompra, String.valueOf(id));
+        mostrarVentanaConfirmacionOcultar(id);
     }
 
     @Override
@@ -101,6 +105,7 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_pedidos, container, false);
 
+        btnActualizarPedidos = vista.findViewById(R.id.btnActualizarPedidos);
 
         vistaCompras = vista.findViewById(R.id.listRVCompras);
         compras = new ArrayList<>();
@@ -111,6 +116,14 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
         vistaCompras.setAdapter(listAdapter);
 
         recuperarCompras(URL_recuperarCompras, String.valueOf(DatosGlobales.getCliente().getId()));
+
+        btnActualizarPedidos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recuperarCompras(URL_recuperarCompras, String.valueOf(DatosGlobales.getCliente().getId()));
+                Toast.makeText(getContext(), "Actualizado", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return vista;
     }
@@ -242,6 +255,34 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
                 break;
             }
         }
+    }
+
+    private void mostrarVentanaConfirmacionOcultar(int id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Confirmación");
+        builder.setMessage("¿Está seguro de ocultar el pedido? Está acción no se puede deshacer");
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Acciones a realizar si el usuario cancela
+                dialog.dismiss();
+            }
+        });
+
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Acciones a realizar si el usuario confirma
+                dialog.dismiss();
+                Toast.makeText(getContext(), "Ocultando compra...", Toast.LENGTH_SHORT).show();
+                ocultarCompra(URL_ocultarCompra, String.valueOf(id));
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }

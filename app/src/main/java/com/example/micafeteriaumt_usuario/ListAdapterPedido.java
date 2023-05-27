@@ -61,11 +61,11 @@ public class ListAdapterPedido extends RecyclerView.Adapter<ListAdapterPedido.Vi
         //pone el contenido
         void bindData(final Pedido pedido) {
             txtProducto.setText(pedido.getNombre_producto());
-            txtCantidad.setText(String.valueOf(pedido.getCantidad()));
+            txtCantidad.setText("Cantidad: " + String.valueOf(pedido.getCantidad()));
 
             DecimalFormat formato = new DecimalFormat("0.00");
             String precio = "$" + formato.format(pedido.getPrecio_producto());
-            txtPrecio.setText(precio);
+            txtPrecio.setText("Precio: " + precio);
         }
 
     }

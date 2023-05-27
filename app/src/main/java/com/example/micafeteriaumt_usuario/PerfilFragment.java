@@ -1,12 +1,31 @@
 package com.example.micafeteriaumt_usuario;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.button.MaterialButton;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +42,11 @@ public class PerfilFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private EditText telefono, nombre, contrasena;
+    private MaterialButton btnActualizar, btnCerrarSesion;
+    String URL_modificarCliente = "https://afflated-sentries.000webhostapp.com/modificarCliente.php";
+    String URL_eliminarCliente = "https://afflated-sentries.000webhostapp.com/eliminarCliente.php";
 
     public PerfilFragment() {
         // Required empty public constructor
@@ -59,6 +83,109 @@ public class PerfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+        View vista = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+        telefono = vista.findViewById(R.id.txtTelefono);
+        nombre = vista.findViewById(R.id.txtNombre);
+        contrasena = vista.findViewById(R.id.txtContrasena);
+        btnActualizar = vista.findViewById(R.id.btnActualizar);
+        btnCerrarSesion = vista.findViewById(R.id.btnCerrarSesion);
+
+        telefono.setEnabled(false);
+        telefono.setLongClickable(false);
+        telefono.setTextColor(Color.GRAY);
+        //telefono.setBackgroundColor(Color.LTGRAY);
+
+        telefono.setText(DatosGlobales.getCliente().getTelefono());
+        nombre.setText(DatosGlobales.getCliente().getNombre());
+        contrasena.setText(DatosGlobales.getCliente().getContrasena());
+
+        btnActualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nombreS = nombre.getText().toString();
+                String contrasenaS = contrasena.getText().toString();
+                String id_cliente = String.valueOf(DatosGlobales.getCliente().getId());
+                actualizarCliente(URL_modificarCliente, id_cliente, nombreS, contrasenaS);
+            }
+        });
+
+        btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrarVentanaConfirmacion();
+            }
+        });
+
+        return vista;
     }
+
+    private void actualizarCliente(String URL, String id_cliente, String nombreS, String contrasenaS){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.isEmpty()){
+                    Cliente cliente = new Cliente(DatosGlobales.getCliente().getId(), nombreS, DatosGlobales.getCliente().getTelefono(), contrasenaS, DatosGlobales.getCliente().getCreacion(), DatosGlobales.getCliente().getActualizado());
+                    DatosGlobales.setCliente(cliente);
+                    Toast.makeText(getContext(), "Perfil actualizado", Toast.LENGTH_SHORT).show();
+                    telefono.setText(DatosGlobales.getCliente().getTelefono());
+                    nombre.setText(DatosGlobales.getCliente().getNombre());
+                    contrasena.setText(DatosGlobales.getCliente().getContrasena());
+                }else{
+                    Toast.makeText(getContext(), "No se pudo actualizar su perfil", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("contrasena", contrasenaS);
+                parametros.put("nombre", nombreS);
+                parametros.put("id_cliente", id_cliente);
+                return parametros;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
+    }
+
+    private void mostrarVentanaConfirmacion() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Confirmación");
+        builder.setMessage("¿Está seguro de cerrar su sesión?");
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Acciones a realizar si el usuario cancela
+                dialog.dismiss();
+            }
+        });
+
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Acciones a realizar si el usuario confirma
+                dialog.dismiss();
+
+                DatosGlobales.setCliente(null);
+                Toast.makeText(getContext(), "Sesión finalizada", Toast.LENGTH_SHORT).show();
+                Intent irInicio = new Intent(getActivity(), LoginActivity.class);
+                irInicio.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(irInicio);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
 }

@@ -22,8 +22,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -105,7 +107,11 @@ public class TipoPagoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "Procesando compra..." ,Toast.LENGTH_SHORT).show();
-                realizarCompra(URL_realizarCompra, String.valueOf(DatosGlobales.getCliente().getId()), "Cafetería");
+                Calendar c = Calendar.getInstance();
+                String hora_compra =  c.get(Calendar.YEAR)+"-"+c.get(Calendar.MONTH)+"-"+c.get(Calendar.DAY_OF_MONTH)+ " " +
+                        c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
+
+                realizarCompra(URL_realizarCompra, String.valueOf(DatosGlobales.getCliente().getId()), "Cafetería", hora_compra);
             }
         });
 
@@ -123,7 +129,7 @@ public class TipoPagoFragment extends Fragment {
         transaction.commit();
     }
 
-    private void realizarCompra(String URL, String id_cliente, String tipo_pago){
+    private void realizarCompra(String URL, String id_cliente, String tipo_pago, String hora_compra){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -151,6 +157,7 @@ public class TipoPagoFragment extends Fragment {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("id_cliente", id_cliente);
                 parametros.put("tipo_compra", tipo_pago);
+                parametros.put("hora_compra", hora_compra);
                 return parametros;
             }
         };

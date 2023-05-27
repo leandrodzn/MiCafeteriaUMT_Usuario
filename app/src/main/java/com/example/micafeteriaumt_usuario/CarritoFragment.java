@@ -1,5 +1,8 @@
 package com.example.micafeteriaumt_usuario;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -87,7 +90,7 @@ import java.util.Map;
 
     @Override
     public void onItemClick(int id) {
-        eliminarCarrito(URL_eliminarCarrito, String.valueOf(id));
+        mostrarVentanaConfirmacionBorrado(id);
     }
 
     @Override
@@ -146,7 +149,7 @@ import java.util.Map;
                     DatosGlobales.setTotalCarrito(sumarTotal());
                     ponerTotal();
                 }else{
-                    Toast.makeText(requireContext(), response, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Carrito vacío", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -261,6 +264,33 @@ import java.util.Map;
         transaction.replace(R.id.frameLayout, tipoPagoFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void mostrarVentanaConfirmacionBorrado(int id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Confirmación");
+        builder.setMessage("¿Está seguro de eliminar el producto de su carrito?");
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Acciones a realizar si el usuario cancela
+                dialog.dismiss();
+            }
+        });
+
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Acciones a realizar si el usuario confirma
+                dialog.dismiss();
+
+                eliminarCarrito(URL_eliminarCarrito, String.valueOf(id));
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }

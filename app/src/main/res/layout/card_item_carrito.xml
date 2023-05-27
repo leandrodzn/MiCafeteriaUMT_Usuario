@@ -21,22 +21,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="6dp">
-
-            <ImageView
-                android:id="@+id/imagenProducto"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center" android:paddingLeft="14dp"
-                android:paddingRight="14dp"
-                app:srcCompat="@drawable/person"
-                android:layout_alignParentLeft="true" />
             
             <LinearLayout
                 android:id="@+id/layoutDetalles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="4dp"
@@ -185,6 +176,7 @@
                 android:layout_toEndOf="@id/layoutDetalles"
                 android:layout_toRightOf="@id/layoutDetalles"
                 android:background="@android:color/transparent"
+                android:tint="@color/cafe"
                 />
 
 

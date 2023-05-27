@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.button.MaterialButton;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -146,7 +147,11 @@ public class PagoTarjetaFragment extends Fragment {
                         Toast.makeText(getContext(), "Debe ingresar un CVV válido" ,Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(getContext(), "Procesando compra..." ,Toast.LENGTH_SHORT).show();
-                        realizarCompra(URL_realizarCompra, String.valueOf(DatosGlobales.getCliente().getId()), "Tarjeta");
+
+                        Calendar c = Calendar.getInstance();
+                        String hora_compra =  c.get(Calendar.YEAR)+"-"+c.get(Calendar.MONTH)+"-"+c.get(Calendar.DAY_OF_MONTH)+ " " +
+                                c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
+                        realizarCompra(URL_realizarCompra, String.valueOf(DatosGlobales.getCliente().getId()), "Tarjeta", hora_compra);
                     }
                 }else{
                     Toast.makeText(getContext(), "Debe ingresar todos los datos" ,Toast.LENGTH_SHORT).show();
@@ -158,7 +163,7 @@ public class PagoTarjetaFragment extends Fragment {
        return vista;
     }
 
-    private void realizarCompra(String URL, String id_cliente, String tipo_pago){
+    private void realizarCompra(String URL, String id_cliente, String tipo_pago, String hora_compra){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -186,6 +191,7 @@ public class PagoTarjetaFragment extends Fragment {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("id_cliente", id_cliente);
                 parametros.put("tipo_compra", tipo_pago);
+                parametros.put("hora_compra", hora_compra);
                 return parametros;
             }
         };
