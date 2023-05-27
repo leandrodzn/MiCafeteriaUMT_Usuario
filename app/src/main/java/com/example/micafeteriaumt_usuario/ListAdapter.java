@@ -24,6 +24,7 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
+//ListAdapter que se usa para la pantalla de Productos, para configurar el recyclerView
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<CardProducto> datos;
     private LayoutInflater mInflater;
@@ -69,14 +70,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 int id = (int) view.getTag();
                 //Log.i("TAG", String.valueOf(id));
 
-                // Parte que sirve para ir a la pantalla de información de un producto
-                /*
-                if (listener != null) {
-                    int adapterPosition = holder.getBindingAdapterPosition();
-                    if (adapterPosition != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(adapterPosition);
-                    }
-                }*/
+                // Parte que sirve para ir a la pantalla de información de un productos
                 if (listener != null) {
                     listener.onItemClick(id);
                 }

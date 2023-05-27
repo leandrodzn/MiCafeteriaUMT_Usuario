@@ -1,5 +1,6 @@
 package com.example.micafeteriaumt_usuario;
 
+//Objeto que es cada elemento de la lista de productos de cada compra
 public class Pedido {
     int id;
     int id_producto;

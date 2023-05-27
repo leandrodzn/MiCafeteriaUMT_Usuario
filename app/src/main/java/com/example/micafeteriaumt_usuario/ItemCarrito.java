@@ -1,5 +1,6 @@
 package com.example.micafeteriaumt_usuario;
 
+//Objeto para mostrar cada producto agregado al carrito
 public class ItemCarrito {
     int id;
     String nombreProducto;

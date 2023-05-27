@@ -39,6 +39,7 @@ import java.util.Map;
  * Use the {@link InfoProductoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+//Pantalla donde se muestra la información individual de cada producto
 public class InfoProductoFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -107,7 +108,7 @@ public class InfoProductoFragment extends Fragment {
         precioProducto = vista.findViewById(R.id.precioProducto);
         btnAgregarCarrito = vista.findViewById(R.id.btnAgregarCarrito);
 
-        btnAgregarCarrito.setVisibility(View.GONE);
+        btnAgregarCarrito.setVisibility(View.GONE); //no borrar
 
         int id_producto = getArguments().getInt("id_producto");
 
@@ -139,6 +140,7 @@ public class InfoProductoFragment extends Fragment {
 
     }
 
+    //obtiene la información del producto
     private void recuperarProducto(String URL, String id_producto){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -181,6 +183,7 @@ public class InfoProductoFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
+    //dependiendo de la cantidad del producto crea las opciones para seleccionar
     private void crearOpcionesCantidad(int cantidadDisponible){
         for (int i = 1; i <= cantidadDisponible ; i++) {
             cantidadesPosibles.add(String.valueOf(i));

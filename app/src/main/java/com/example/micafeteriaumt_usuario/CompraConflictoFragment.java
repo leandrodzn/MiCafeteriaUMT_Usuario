@@ -16,6 +16,8 @@ import com.google.android.material.button.MaterialButton;
  * Use the {@link CompraConflictoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+//Pantalla que se muestra cuando hay productos en el carrito del usuario que no se pueden comprar porque tiene seleccionado más
+    // unidades que las que hay en la BD
 public class CompraConflictoFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match

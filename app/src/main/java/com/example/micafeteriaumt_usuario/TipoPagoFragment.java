@@ -32,6 +32,7 @@ import java.util.TimeZone;
  * Use the {@link TipoPagoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+// Pregunta el tipo de pago a realizar
 public class TipoPagoFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match

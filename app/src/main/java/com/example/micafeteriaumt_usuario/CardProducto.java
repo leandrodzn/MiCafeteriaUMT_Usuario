@@ -1,5 +1,5 @@
 package com.example.micafeteriaumt_usuario;
-
+//Objeto que sirve para mostrar los productos existentes en la vista de Productos
 public class CardProducto {
     public int id;
     public String nombreProducto;
