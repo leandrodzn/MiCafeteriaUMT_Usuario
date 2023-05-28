@@ -155,7 +155,16 @@ public class InfoProductoFragment extends Fragment {
                     String precio = "$" + formato.format(producto.getPrecio_unidad());
                     precioProducto.setText(precio);
 
-                    crearOpcionesCantidad(producto.getCantidad());
+                    int cantidad = producto.getCantidad();
+                    //si no hay cantidad en el producto se bloquea el boton de agregar y se oculta el selector de cantidad
+                    if(cantidad > 0){
+                        crearOpcionesCantidad(cantidad);
+                    }else{
+                        selectCantidad.setVisibility(View.GONE);
+                        btnAgregarCarrito.setEnabled(false);
+                    }
+
+                    //crearOpcionesCantidad(producto.getCantidad());
                     adapterSelect.notifyDataSetChanged();
                     btnAgregarCarrito.setVisibility(View.VISIBLE);
 
