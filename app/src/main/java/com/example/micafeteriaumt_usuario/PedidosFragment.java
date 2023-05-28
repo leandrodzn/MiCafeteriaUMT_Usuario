@@ -85,6 +85,7 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
         return fragment;
     }
 
+    // se usa al pulsar el boton que tiene cada compra
     @Override
     public void onItemClick(int id) {
         mostrarVentanaConfirmacionOcultar(id);
@@ -107,6 +108,7 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
 
         btnActualizarPedidos = vista.findViewById(R.id.btnActualizarPedidos);
 
+        //configuracion del recyclerView donde se ve la lista de compras
         vistaCompras = vista.findViewById(R.id.listRVCompras);
         compras = new ArrayList<>();
         listAdapter = new ListAdapterCompra(compras, getContext());
@@ -114,6 +116,7 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
         vistaCompras.setHasFixedSize(true);
         vistaCompras.setLayoutManager(new LinearLayoutManager(getContext()));
         vistaCompras.setAdapter(listAdapter);
+
 
         recuperarCompras(URL_recuperarCompras, String.valueOf(DatosGlobales.getCliente().getId()));
 
@@ -128,6 +131,7 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
         return vista;
     }
 
+    //consulta la BD para obtener todas las compras que ha hecho el cliente
     private void recuperarCompras(String URL, String id_cliente){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -159,6 +163,7 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
         requestQueue.add(stringRequest);
     }
 
+    //lee el json que trae la base de datos con todos los datos de una compra
     private void leerJSONCompra(String response){
         try {
             JSONArray jsonArray = new JSONArray(response);
@@ -190,6 +195,7 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
         }
     }
 
+    //lee el json pedidos que viene de la BD, la convierte en un arraylist
     private List<Pedido> leerJSONPedidos(String pedidosString){
         List<Pedido> pedidos = new ArrayList<>();
         try {
@@ -213,6 +219,8 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
         return pedidos;
     }
 
+
+    //realiza la acción necesaria en la base de datos para ocultar la compra al usuario
     private void ocultarCompra(String URL, String id_compra){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -246,6 +254,7 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
         requestQueue.add(stringRequest);
     }
 
+    //elimina la compra que se ocultó de la lista local, no de la base de datos
     private void eliminarCompraEnLista(int id_compra){
         Iterator<Compra> iter = compras.iterator();
         while (iter.hasNext()) {
@@ -260,7 +269,7 @@ public class PedidosFragment extends Fragment implements  ListAdapterCompra.OnIt
     private void mostrarVentanaConfirmacionOcultar(int id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Confirmación");
-        builder.setMessage("¿Está seguro de ocultar el pedido? Está acción no se puede deshacer");
+        builder.setMessage("¿Está seguro de ocultar el pedido? Esta acción no se puede deshacer");
 
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override

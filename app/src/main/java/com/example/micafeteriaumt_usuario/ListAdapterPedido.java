@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DecimalFormat;
 import java.util.List;
 
+//ListAdapter para configurar la lista de los productos que contiene la compra
 public class ListAdapterPedido extends RecyclerView.Adapter<ListAdapterPedido.ViewHolder> {
     private List<Pedido> datos;
     private LayoutInflater mInflater;

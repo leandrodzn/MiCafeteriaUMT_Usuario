@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 import com.example.micafeteriaumt_usuario.databinding.ActivityPrincipalBinding;
 
-
+//Activity principal donde se intercambian los fragments del sistema cuando ya se inició sesión
 public class PrincipalActivity extends AppCompatActivity {
 
     ActivityPrincipalBinding binding;

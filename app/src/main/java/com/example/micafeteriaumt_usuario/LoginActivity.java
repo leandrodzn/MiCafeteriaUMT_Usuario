@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    //consulta a la BD
     private void validarCliente(String URL){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override

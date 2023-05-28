@@ -16,6 +16,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+//ListAdapter para la pantalla de Pedidos que muestra todos las compras que se han hecho
 public class ListAdapterCompra extends RecyclerView.Adapter<ListAdapterCompra.ViewHolder> {
 private List<Compra> datos;
 private LayoutInflater mInflater;
@@ -23,12 +24,12 @@ private Context context;
 
 private ListAdapterCompra.OnItemClickListener listener; // Sirve para cuando presione el icono de eliminar de carrito
 
-// Sirve para cuando presione el icono de eliminar de carrito
+// Sirve para cuando presione el icono de ocultar
 public interface OnItemClickListener {
     void onItemClick(int id);
 }
 
-    // Sirve para cuando presione el icono de eliminar de carrito
+    // Sirve para cuando presione el icono de ocultar
     public void setOnItemClickListener(ListAdapterCompra.OnItemClickListener listener) {
         this.listener = listener;
     }
@@ -105,6 +106,7 @@ public class ViewHolder extends RecyclerView.ViewHolder{
 
         btnOcultar.setTag(compra.getId());
 
+        //configuración del recyclerView dentro para mostrar la lista de los productos que contiene la compra
         listAdapter = new ListAdapterPedido(compra.getPedidos(), itemView.getContext());
         listaPedidos.setAdapter(listAdapter);
         listaPedidos.setHasFixedSize(true);

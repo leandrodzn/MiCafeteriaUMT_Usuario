@@ -88,6 +88,7 @@ import java.util.Map;
         return fragment;
     }
 
+    //sirve cuando se da click en el boton borrar de cada producto en el carrito
     @Override
     public void onItemClick(int id) {
         mostrarVentanaConfirmacionBorrado(id);
@@ -114,6 +115,7 @@ import java.util.Map;
         String id_cliente = String.valueOf(DatosGlobales.getCliente().getId());
         btnComprar = vista.findViewById(R.id.btnComprar);
 
+        //configuración del recyclerView para ver la lista de productos en el carrito
         vistaCarrito = vista.findViewById(R.id.listRVCarrito);
         carrito = new ArrayList<>();
         listAdapter = new ListAdapterCarrito(carrito, getContext());
@@ -138,6 +140,7 @@ import java.util.Map;
         return vista;
     }
 
+    //consulta a la BD para recuperar el carrito del cliente
     private void recuperarCarrito(String URL, String id_cliente){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -172,6 +175,7 @@ import java.util.Map;
         requestQueue.add(stringRequest);
     }
 
+    //lee el json que trae la lista de productos que están en el carrito
     private void leerJSON(String response){
         try {
             JSONArray jsonArray = new JSONArray(response);
@@ -195,6 +199,7 @@ import java.util.Map;
         }
     }
 
+    //pone el total como texto
     private void ponerTotal(){
         Double totalCarrito = sumarTotal();
         DecimalFormat formato = new DecimalFormat("0.00");
@@ -202,6 +207,7 @@ import java.util.Map;
         tvTotal.setText("Total: " + totalString);
     }
 
+    //calcula el total del carrito
     private Double sumarTotal(){
         Double total = 0.0;
         for (ItemCarrito item:carrito) {
@@ -211,6 +217,7 @@ import java.util.Map;
         return total;
     }
 
+    //realiza la consulta para eliminar el producto del carrito
     private void eliminarCarrito(String URL, String id_carrito){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -245,6 +252,7 @@ import java.util.Map;
         requestQueue.add(stringRequest);
     }
 
+    //quita el producto eliminado de la lista local
     private void eliminarObjetoCarrito(int id_carrito) {
         Iterator<ItemCarrito> iter = carrito.iterator();
         while (iter.hasNext()) {

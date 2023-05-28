@@ -19,9 +19,6 @@
             android:name=".PrincipalActivity"
             android:exported="false" />
         <activity
-            android:name=".ProductosDiaActivity"
-            android:exported="false" />
-        <activity
             android:name=".RegistroActivity"
             android:exported="false" />
         <activity

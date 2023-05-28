@@ -3,6 +3,7 @@ package com.example.micafeteriaumt_usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+// Objeto que sirve para mostrar las compras en la parte de Pedidos
 public class Compra {
     int id;
     int id_cliente;

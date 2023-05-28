@@ -17,6 +17,7 @@ import com.google.android.material.button.MaterialButton;
 import java.text.DecimalFormat;
 import java.util.List;
 
+//ListAdapter para ver todos los productos agregados en el carrito
 public class ListAdapterCarrito extends RecyclerView.Adapter<ListAdapterCarrito.ViewHolder> {
     private List<ItemCarrito> datos;
     private LayoutInflater mInflater;

@@ -16,6 +16,7 @@ import com.google.android.material.button.MaterialButton;
  * Use the {@link CompraExitosaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+//Se llama cuando la compra es exitosa
 public class CompraExitosaFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
